@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
 
 function Index() {
@@ -8,15 +9,18 @@ function Index() {
     { to: string; from: string; value: string }[]
   >([]);
   const [latestHeight, setHeight] = useState<number>(0);
-  const { walletId } = useSelector(
-    (state: { auth: { walletId: string } }) => state.auth
+  const { walletId, isAuthenticated } = useSelector(
+    (state: { auth: { walletId: string; isAuthenticated: boolean } }) =>
+      state.auth
   );
+  const navigate = useNavigate();
 
   const getLists = async (add?: string) => setList(await API.transaction(add));
 
   const getLatestBlockHeight = async () => setHeight(await API.latestBlock());
 
   useEffect(() => {
+    if (!isAuthenticated) navigate("/login");
     getLists(walletId);
     getLatestBlockHeight();
   }, []);

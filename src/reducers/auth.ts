@@ -3,9 +3,9 @@ import { actionType, authState } from "../types/auth";
 
 const authReducer = (
   state = {
-    walletId: "string",
-    blockchain: "string",
-    network: "string",
+    walletId: "",
+    blockchain: "",
+    network: "",
     isAuthenticated: false,
   },
   action: actionType
