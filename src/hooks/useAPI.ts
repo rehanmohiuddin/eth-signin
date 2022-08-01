@@ -6,7 +6,7 @@ function useAPI() {
   ) => {
     try {
       const resp = await fetch(
-        `http://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=asc&apikey=${process.env.ETHERSCAN_API_KEY}`,
+        `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=asc&apikey=${process.env.ETHERSCAN_API_KEY}`,
         { method: "GET" }
       );
       const { result = [] } = await resp.json();
